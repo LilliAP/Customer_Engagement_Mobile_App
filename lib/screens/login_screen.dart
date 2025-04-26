@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/signup');
+                Navigator.pushReplacementNamed(context, '/signup');
               }, 
               child: const Text.rich(
                 TextSpan(
@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/home');
               }, 
               child: const Text.rich(
                 TextSpan(

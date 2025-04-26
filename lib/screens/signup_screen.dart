@@ -72,7 +72,7 @@ class SignupScreen extends StatelessWidget {
                 ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushReplacementNamed(context, '/login');
               }, 
               child: const Text.rich(
                 TextSpan(
@@ -88,7 +88,7 @@ class SignupScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/home');
               }, 
               child: const Text.rich(
                 TextSpan(
