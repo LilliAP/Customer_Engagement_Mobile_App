@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
   static const String par1Start = """At KAG's Coffee & Bagels, we believe in slow mornings, warm conversations, 
                                 and the simple joy of a good cup of coffee paired with a fresh bagel. Since 
                                 opening our doors in 2007, we've""";

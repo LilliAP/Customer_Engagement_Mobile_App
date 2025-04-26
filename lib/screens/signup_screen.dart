@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _fullNameController = TextEditingController();
-    final TextEditingController _usernameController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passController = TextEditingController();
-    final TextEditingController _confirmPassController = TextEditingController();
+    final TextEditingController fullNameController = TextEditingController();
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passController = TextEditingController();
+    final TextEditingController confirmPassController = TextEditingController();
 
-    final AuthService _authService = AuthService();
+    final AuthService authService = AuthService();
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -23,46 +23,46 @@ class SignupScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5.0),
             TextField(
-              controller: _fullNameController,
+              controller: fullNameController,
               decoration: const InputDecoration(labelText: '  Full Name'),
             ),
             TextField(
-              controller: _usernameController,
+              controller: usernameController,
               decoration: const InputDecoration(labelText: '  Username'),
             ),
             TextField(
-              controller: _emailController,
+              controller: emailController,
               decoration: const InputDecoration(labelText: '  Email'),
             ),
             TextField(
-              controller: _passController,
+              controller: passController,
               decoration: const InputDecoration(labelText: '  Password'),
               obscureText: true,
             ),
             TextField(
-              controller: _confirmPassController,
+              controller: confirmPassController,
               decoration: const InputDecoration(labelText: '  Confirm Password'),
               obscureText: true,
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
                   onPressed: () async {
-                    if(_passController.text.trim() != _confirmPassController.text.trim()) {
+                    if(passController.text.trim() != confirmPassController.text.trim()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Passwords do not match'))
                       );
                       return;
                     }
                     try {
-                      await _authService.signUp(
-                        _emailController.text.trim(),
-                        _passController.text.trim(),
+                      await authService.signUp(
+                        emailController.text.trim(),
+                        passController.text.trim(),
                       );
                       // On login success, redirect to home
                       Navigator.pushReplacementNamed(context, '/login');
                     }
                     catch(e) {
-                      print('Sign Up Failed: $e');
+                      //print('Sign Up Failed: $e');  // used for debugging
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Sign up failed'))
                       );

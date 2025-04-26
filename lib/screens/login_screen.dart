@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushReplacementNamed(context, '/home');
                     }
                     catch(e) {
-                      print('Login Failed: $e');
+                      //print('Login Failed: $e');    // used for debugging
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Login failed'))
                       );

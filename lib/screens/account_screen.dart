@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
