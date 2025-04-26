@@ -35,11 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: const InputDecoration(labelText: '  Password'),
               obscureText: true,
             ),
-            const SizedBox(height: 10.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
+            const SizedBox(height: 20.0),
+            ElevatedButton(
                   onPressed: () async {
                     try {
                       await _authService.signIn(
@@ -58,13 +55,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   }, 
                   child: const Text('Login'),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
-                  }, 
-                  child: const Text('Signup'),
-                ),
-              ],
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/signup');
+              }, 
+              child: const Text.rich(
+                TextSpan(
+                  text: 'Don\'t have an account? ',
+                  children: [
+                    TextSpan(
+                      text: 'Sign up!',
+                      style: TextStyle(fontStyle: FontStyle.italic)
+                    )
+                  ]
+                )
+              ),
             ),
           ]
         )
