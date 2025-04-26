@@ -1,5 +1,3 @@
-// TODO: Implement Signup UI and Logic
-
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 
@@ -8,11 +6,89 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _fullNameController = TextEditingController();
+    final TextEditingController _usernameController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passController = TextEditingController();
+    final TextEditingController _confirmPassController = TextEditingController();
+
+    final AuthService _authService = AuthService();
     return Scaffold(
-      appBar: AppBar(title: const Text('Signup')),
-      body: const Center(
-        child: Text('Signup Page Placeholder'),
-      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Center(
+              child: Image.asset("assets/images/kagLogo.png")
+            ),
+            const SizedBox(height: 5.0),
+            TextField(
+              controller: _fullNameController,
+              decoration: const InputDecoration(labelText: '  Full Name'),
+            ),
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(labelText: '  Username'),
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(labelText: '  Email'),
+            ),
+            TextField(
+              controller: _passController,
+              decoration: const InputDecoration(labelText: '  Password'),
+              obscureText: true,
+            ),
+            TextField(
+              controller: _confirmPassController,
+              decoration: const InputDecoration(labelText: '  Confirm Password'),
+              obscureText: true,
+            ),
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+                  onPressed: () async {
+                    if(_passController.text.trim() != _confirmPassController.text.trim()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Passwords do not match'))
+                      );
+                      return;
+                    }
+                    try {
+                      await _authService.signUp(
+                        _emailController.text.trim(),
+                        _passController.text.trim(),
+                      );
+                      // On login success, redirect to home
+                      Navigator.pushReplacementNamed(context, '/login');
+                    }
+                    catch(e) {
+                      print('Sign Up Failed: $e');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Sign up failed'))
+                      );
+                    }
+                  }, 
+                  child: const Text('Sign Up'),
+                ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              }, 
+              child: const Text.rich(
+                TextSpan(
+                  text: 'Already have an account? ',
+                  children: [
+                    TextSpan(
+                      text: 'Log In!',
+                      style: TextStyle(fontStyle: FontStyle.italic)
+                    )
+                  ]
+                )
+              ),
+            ),
+          ]
+        )
+      )
     );
   }
 }

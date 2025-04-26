@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:se330_project_2/screens/auth_wrapper.dart';
 import 'package:se330_project_2/screens/home_screen.dart';
 import 'package:se330_project_2/screens/login_screen.dart';
 import 'package:se330_project_2/screens/signup_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Kag\'s Coffee & Bagels',
       theme: AppTheme.appThemeData,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      home: const AuthWrapper(),
       routes: {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
