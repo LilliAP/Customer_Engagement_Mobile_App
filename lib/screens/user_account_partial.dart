@@ -57,7 +57,7 @@ class UserAccountPartial extends StatelessWidget {
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () async {
-                  //Navigator.pushReplacementNamed(context, '/editProfile');
+                  Navigator.pushReplacementNamed(context, '/editProfile');
               }, 
               child: const Text(
                 'Edit Profile', 
