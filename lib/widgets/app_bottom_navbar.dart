@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:se330_project_2/screens/account_screen.dart';
+import 'package:se330_project_2/screens/blog_screen.dart';
+import 'package:se330_project_2/screens/home_screen.dart';
+import 'package:se330_project_2/screens/messages_screen.dart';
 import 'package:se330_project_2/widgets/app_theme.dart';
 
 class AppBottomNavBar extends StatelessWidget {
@@ -6,33 +10,30 @@ class AppBottomNavBar extends StatelessWidget {
 
   const AppBottomNavBar({super.key, required this.selectedIndex});
 
-  // void _onItemTapped(BuildContext context, int index) {
-  //   if (index == selectedIndex) return;
+  void _onItemTapped(BuildContext context, int index) {
+    if (index == selectedIndex) return;
 
-  //   Widget destination;
-  //   switch (index) {
-  //     case 0:
-  //       destination = HomePage();
-  //       break;
-  //     case 1: 
-  //       destination = BlogPostsPage();
-  //       break;
-  //     case 2: 
-  //       destination = Messages();
-  //       break;
-  //     case 3:
-  //       destination = AccountPage();
-  //       break;
-  //     default:
-  //       destination = HomePage();
-  //       break;
-  //   }
+    String destination;
+    switch (index) {
+      case 0:
+        destination = '/home';
+        break;
+      case 1: 
+        destination = '/blog';
+        break;
+      case 2: 
+        destination = '/messages';
+        break;
+      case 3:
+        destination = '/account';
+        break;
+      default:
+        destination = '/home';
+        break;
+    }
 
-  //   Navigator.push(
-  //     context, 
-  //     MaterialPageRoute(builder: (context) => destination),
-  //   );
-  // }
+    Navigator.pushReplacementNamed(context, destination);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class AppBottomNavBar extends StatelessWidget {
       showUnselectedLabels: false,
       // icons and index
       currentIndex: selectedIndex,
-      //onTap: (index) => _onItemTapped(context, index),
+      onTap: (index) => _onItemTapped(context, index),
       items: [
         _buildNavItem(Icons.home, "Home", 0),
         _buildNavItem(Icons.article, "Blog", 1),

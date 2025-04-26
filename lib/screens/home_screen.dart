@@ -1,6 +1,5 @@
-// TODO: Implement Homepage
-
 import 'package:flutter/material.dart';
+import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,6 +11,7 @@ class HomeScreen extends StatelessWidget {
       body: const Center(
         child: Text('Home Page Placeholder'),
       ),
+      bottomNavigationBar: AppBottomNavBar(selectedIndex: 0)
     );
   }
 }
