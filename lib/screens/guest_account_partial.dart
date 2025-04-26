@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 
 class GuestAccountPartial extends StatelessWidget {
   const GuestAccountPartial({super.key});

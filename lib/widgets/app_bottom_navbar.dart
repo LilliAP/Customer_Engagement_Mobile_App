@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:se330_project_2/screens/account_screen.dart';
-import 'package:se330_project_2/screens/blog_screen.dart';
-import 'package:se330_project_2/screens/home_screen.dart';
-import 'package:se330_project_2/screens/messages_screen.dart';
 import 'package:se330_project_2/widgets/app_theme.dart';
 
 class AppBottomNavBar extends StatelessWidget {

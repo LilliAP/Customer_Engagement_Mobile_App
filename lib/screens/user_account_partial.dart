@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 
 class UserAccountPartial extends StatelessWidget {
   const UserAccountPartial({super.key});
