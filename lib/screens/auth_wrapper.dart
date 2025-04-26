@@ -8,12 +8,23 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    User? user = FirebaseAuth.instance.currentUser;
-    if(user != null){
-      return const HomeScreen();
-    }
-    else{
-      return const LoginScreen();
-    }
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(), 
+      builder: (context, snapshot) {
+        if(snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            )
+          );
+        }
+        else if (snapshot.hasData) {  // User is logged in
+          return const HomeScreen();  
+        }
+        else{
+          return const LoginScreen();
+        }
+      }
+    );
   }
 }
