@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "221030708702",
+    "project_id": "se330-project2",
+    "storage_bucket": "se330-project2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221030708702:android:ef23b1b40e89ba6625194f",
+        "android_client_info": {
+          "package_name": "com.example.se330_project_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSjTz8uUFeEr4uRaM8Al9cAKrJaeyPxpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
