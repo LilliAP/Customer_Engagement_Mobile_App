@@ -15,7 +15,7 @@ class SignupScreen extends StatelessWidget {
     final AuthService authService = AuthService();
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
             Center(
@@ -79,7 +79,23 @@ class SignupScreen extends StatelessWidget {
                   text: 'Already have an account? ',
                   children: [
                     TextSpan(
-                      text: 'Log In!',
+                      text: 'Log In',
+                      style: TextStyle(fontStyle: FontStyle.italic)
+                    )
+                  ]
+                )
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              }, 
+              child: const Text.rich(
+                TextSpan(
+                  text: 'Or ',
+                  children: [
+                    TextSpan(
+                      text: 'Continue as a Guest',
                       style: TextStyle(fontStyle: FontStyle.italic)
                     )
                   ]

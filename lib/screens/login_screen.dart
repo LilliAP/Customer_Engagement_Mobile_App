@@ -75,7 +75,17 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.pushNamed(context, '/home');
               }, 
-              child: const Text("View as Guest"),
+              child: const Text.rich(
+                TextSpan(
+                  text: 'Or ',
+                  children: [
+                    TextSpan(
+                      text: 'Continue as a Guest',
+                      style: TextStyle(fontStyle: FontStyle.italic)
+                    )
+                  ]
+                )
+              ),
             ),
           ]
         )

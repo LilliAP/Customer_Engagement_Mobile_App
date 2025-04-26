@@ -14,6 +14,9 @@ class AppTheme{
   static final ThemeData appThemeData = ThemeData(
     useMaterial3: true,
     colorScheme: appColorScheme,
-    textTheme: GoogleFonts.heptaSlabTextTheme(),
+    textTheme: GoogleFonts.heptaSlabTextTheme().apply(
+      bodyColor: Color(0xff57482c),
+      displayColor: Color(0xff57482c),
+    ),
   );
 }
