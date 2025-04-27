@@ -48,15 +48,20 @@ class UserAccountPartial extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 Text(
-                  userData['fullName'] ?? "Name Placeholder",
+                  userData['fullName'] ?? "Full Name",
                   style: TextStyle(fontWeight: FontWeight.bold),
-                ),       // populated by db later
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  userData['username'] ?? "Username",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 8.0),
                 Text(
                   '${user?.email ?? Placeholder}', 
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 60.0),
+                const SizedBox(height: 30.0),
                 ElevatedButton(
                   onPressed: () async {
                       Navigator.pushReplacementNamed(context, '/messages');

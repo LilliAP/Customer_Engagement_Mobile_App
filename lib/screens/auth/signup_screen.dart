@@ -66,6 +66,7 @@ class SignupScreen extends StatelessWidget {
                     }
                     catch(e) {
                       //print('Sign Up Failed: $e');  // used for debugging
+                      
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Sign up failed'))
                       );
