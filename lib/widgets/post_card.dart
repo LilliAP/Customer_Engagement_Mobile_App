@@ -51,7 +51,7 @@ class PostCard extends StatelessWidget {
               ),
               const SizedBox(height: 12.0),
               Text(
-                GetBody(post),
+                _getBody(post),
                 //_previewText(post.body),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
@@ -64,7 +64,7 @@ class PostCard extends StatelessWidget {
   }
 }
 
-String GetBody(Post post){
+String _getBody(Post post){
     final Delta delta = Delta.fromJson(jsonDecode(post.body));
     final Document body = Document.fromDelta(delta);
     return body.toPlainText().trim();

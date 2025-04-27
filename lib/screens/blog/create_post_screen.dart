@@ -109,7 +109,7 @@ class CreatePostScreen extends StatelessWidget {
                       Navigator.pop(context);
                     }
                     catch(e){
-                      print('Failed to create post: $e');  // for debugging
+                      // print('Failed to create post: $e');  // for debugging
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Failed to create post')

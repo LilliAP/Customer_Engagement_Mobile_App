@@ -9,7 +9,6 @@ class UserAccountPartial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    final userDoc = getUserProfile(user);
     
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +21,7 @@ class UserAccountPartial extends StatelessWidget {
         ),
       ),
       body: FutureBuilder<DocumentSnapshot>(
-        future: getUserProfile(user),
+        future: _getUserProfile(user),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -126,7 +125,7 @@ class UserAccountPartial extends StatelessWidget {
   }
 }
 
-Future<DocumentSnapshot> getUserProfile(User? user) async {
+Future<DocumentSnapshot> _getUserProfile(User? user) async {
   if (user == null) throw Exception('No logged in user');
 
   final querySnapshot = await FirebaseFirestore.instance
