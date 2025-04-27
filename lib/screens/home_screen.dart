@@ -21,6 +21,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "About the Company", 
+          style: GoogleFonts.lora(
+            fontWeight: FontWeight.bold, 
+            fontSize: 28.0
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(
           vertical: 2.0,
@@ -28,14 +37,6 @@ class HomeScreen extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            const SizedBox(height: 20.0),
-            Text(
-              "About the Company", 
-              style: GoogleFonts.lora(
-                fontWeight: FontWeight.bold, 
-                fontSize: 30.0
-              ),
-            ),
             const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start, 

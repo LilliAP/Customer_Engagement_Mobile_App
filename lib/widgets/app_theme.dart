@@ -23,6 +23,10 @@ class AppTheme{
         backgroundColor: appColorScheme.secondary,
         foregroundColor: appColorScheme.surface
       )
-      )
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: appColorScheme.secondary,
+      foregroundColor: appColorScheme.surface
+    ),
     );
 }

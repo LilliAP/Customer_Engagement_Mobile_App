@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:se330_project_2/screens/account_screen.dart';
 import 'package:se330_project_2/screens/auth_wrapper.dart';
 import 'package:se330_project_2/screens/blog_screen.dart';
+import 'package:se330_project_2/screens/create_post_screen.dart';
 import 'package:se330_project_2/screens/edit_profile_screen.dart';
 import 'package:se330_project_2/screens/home_screen.dart';
 import 'package:se330_project_2/screens/login_screen.dart';
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
         '/blog': (context) => const BlogScreen(),
         '/messages': (context) => const MessagesScreen(),
         '/account': (context) => const AccountScreen(),
-        '/editProfile': (context) => const EditProfileScreen(),
+        '/edit_profile': (context) => const EditProfileScreen(),
+        '/create_post': (context) => const CreatePostScreen(),
       },
     );
   }
