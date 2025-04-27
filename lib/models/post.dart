@@ -24,7 +24,9 @@ class Post {
       body: map['body'], 
       authorId: map['authorId'], 
       authorName: map['authorName'], 
-      timestamp: (map['timestamp'] as Timestamp).toDate(),
+      timestamp: map['timestamp'] != null && map['timestamp'] is Timestamp
+        ? (map['timestamp'] as Timestamp).toDate()
+        : DateTime.now(), // fallback if timestamp is missing
     );
   }
 }

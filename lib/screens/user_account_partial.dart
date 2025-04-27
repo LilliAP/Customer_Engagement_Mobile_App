@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserAccountPartial extends StatelessWidget {
   const UserAccountPartial({super.key});
@@ -9,12 +10,21 @@ class UserAccountPartial extends StatelessWidget {
     User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Account", 
+          style: GoogleFonts.lora(
+            fontWeight: FontWeight.bold, 
+            fontSize: 28.0
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0), 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 50.0,),
+            const SizedBox(height: 20.0),
             Center(
               child: Image.asset(
                 "assets/images/kagLogoOnly.png",
@@ -73,7 +83,7 @@ class UserAccountPartial extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(height: 50.0),
+            const SizedBox(height: 8.4),
             Align(
               alignment: Alignment.bottomRight, 
               child: IconButton(
@@ -83,7 +93,7 @@ class UserAccountPartial extends StatelessWidget {
                 }, 
                 icon: Icon(
                   Icons.exit_to_app,
-                  size: 40.0,
+                  size: 35.0,
                 )
               )
             )
