@@ -54,7 +54,7 @@ class UserMessagesPartial extends StatelessWidget {
             final data = doc.data() as Map<String, dynamic>;
             final senderId = data['senderId'];
             final receiverId = data['receiverId'];
-            if (senderId == user!.uid) {
+            if (senderId == user.uid) {
               messagedUsers.add(receiverId);
             }
             else if (receiverId == user.uid) {
@@ -77,7 +77,7 @@ class UserMessagesPartial extends StatelessWidget {
                       fontSize: 20.0,
                     ),
                   ),
-                  const SizedBox(height: 10.0),
+                  SizedBox(height: 10.0),
                   Text('Start one now by pressing the \'Message\' button!'),
                 ],
               ),
@@ -105,6 +105,15 @@ class UserMessagesPartial extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: FirebaseAuth.instance.currentUser != null ? 
+        FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.pushNamed(context, '/start_message');
+          },
+          icon: Icon(Icons.messenger_outline_rounded),
+          label: Text('Start a New Chat'),
+        )
+        : null,
     );
   }
 }

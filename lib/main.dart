@@ -12,6 +12,7 @@ import 'package:se330_project_2/screens/home_screen.dart';
 import 'package:se330_project_2/screens/auth/login_screen.dart';
 import 'package:se330_project_2/screens/messages/messages_screen.dart';
 import 'package:se330_project_2/screens/auth/signup_screen.dart';
+import 'package:se330_project_2/screens/messages/start_message_screen.dart';
 import 'package:se330_project_2/widgets/app_theme.dart';
 
 void main() async{
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/account': (context) => const AccountScreen(),
         '/edit_profile': (context) => const EditProfileScreen(),
         '/create_post': (context) => const CreatePostScreen(),
+        '/start_message': (context) => const StartMessageScreen(),
       },
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
