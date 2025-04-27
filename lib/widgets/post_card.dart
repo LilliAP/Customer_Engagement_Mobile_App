@@ -4,7 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 import 'package:intl/intl.dart';
 import 'package:se330_project_2/models/post.dart';
-import 'package:se330_project_2/screens/full_post_screen.dart';
+import 'package:se330_project_2/screens/blog/full_post_screen.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;

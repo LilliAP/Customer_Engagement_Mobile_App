@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:se330_project_2/screens/private_message_screen.dart';
+import 'package:se330_project_2/screens/messages/private_message_screen.dart';
 
 class UserMessagesPartial extends StatelessWidget {
   const UserMessagesPartial({super.key});

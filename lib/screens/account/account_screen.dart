@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:se330_project_2/screens/account_wrapper.dart';
+import 'package:se330_project_2/screens/account/account_wrapper.dart';
 import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 
 class AccountScreen extends StatelessWidget {

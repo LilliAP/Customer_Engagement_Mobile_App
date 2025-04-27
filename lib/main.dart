@@ -3,15 +3,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:se330_project_2/screens/account_screen.dart';
-import 'package:se330_project_2/screens/auth_wrapper.dart';
-import 'package:se330_project_2/screens/blog_screen.dart';
-import 'package:se330_project_2/screens/create_post_screen.dart';
-import 'package:se330_project_2/screens/edit_profile_screen.dart';
+import 'package:se330_project_2/screens/account/account_screen.dart';
+import 'package:se330_project_2/screens/auth/auth_wrapper.dart';
+import 'package:se330_project_2/screens/blog/blog_screen.dart';
+import 'package:se330_project_2/screens/blog/create_post_screen.dart';
+import 'package:se330_project_2/screens/account/edit_profile_screen.dart';
 import 'package:se330_project_2/screens/home_screen.dart';
-import 'package:se330_project_2/screens/login_screen.dart';
-import 'package:se330_project_2/screens/messages_screen.dart';
-import 'package:se330_project_2/screens/signup_screen.dart';
+import 'package:se330_project_2/screens/auth/login_screen.dart';
+import 'package:se330_project_2/screens/messages/messages_screen.dart';
+import 'package:se330_project_2/screens/auth/signup_screen.dart';
 import 'package:se330_project_2/widgets/app_theme.dart';
 
 void main() async{
