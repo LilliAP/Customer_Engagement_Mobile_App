@@ -40,7 +40,6 @@ class BlogScreen extends StatelessWidget {
           );
         }
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       floatingActionButton: FirebaseAuth.instance.currentUser != null ? 
         FloatingActionButton.extended(
           onPressed: () {
