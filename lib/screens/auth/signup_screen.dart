@@ -57,7 +57,10 @@ class SignupScreen extends StatelessWidget {
                       await authService.signUp(
                         emailController.text.trim(),
                         passController.text.trim(),
+                        usernameController.text.trim(),
+                        fullNameController.text.trim()
                       );
+                      
                       // On login success, redirect to home
                       Navigator.pushReplacementNamed(context, '/login');
                     }
