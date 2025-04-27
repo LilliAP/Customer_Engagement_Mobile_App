@@ -18,5 +18,11 @@ class AppTheme{
       bodyColor: Color(0xff57482c),
       displayColor: Color(0xff57482c),
     ),
-  );
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: appColorScheme.secondary,
+        foregroundColor: appColorScheme.surface
+      )
+      )
+    );
 }
