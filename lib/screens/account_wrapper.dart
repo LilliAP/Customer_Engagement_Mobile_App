@@ -13,7 +13,7 @@ class AccountWrapper extends StatelessWidget {
       return const UserAccountPartial();
     }
     else{
-      return const GuestAccountPartial();
+      return const GuestPartial();
     }
   }
 }

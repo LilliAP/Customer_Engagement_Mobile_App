@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GuestAccountPartial extends StatelessWidget {
-  const GuestAccountPartial({super.key});
+class GuestPartial extends StatelessWidget {
+  const GuestPartial({super.key});
 
   @override
   Widget build(BuildContext context) {

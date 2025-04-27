@@ -12,7 +12,7 @@ class UserAccountPartial extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Account", 
+          "Account Information", 
           style: GoogleFonts.lora(
             fontWeight: FontWeight.bold, 
             fontSize: 28.0
@@ -76,7 +76,9 @@ class UserAccountPartial extends StatelessWidget {
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () async {
-                  // NOT IMPLEMENTING
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Redirect to Help Page'))
+                );
               }, 
               child: const Text(
                 'Contact Us', 
