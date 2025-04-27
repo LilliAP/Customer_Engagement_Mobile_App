@@ -49,18 +49,18 @@ class UserMessagesPartial extends StatelessWidget {
           }
           final docs = snapshot.data!.docs;
           final Set<String> messagedUsers = {};
-
+          print('Logged in UID: ${user!.uid}');
           for(var doc in docs) {
             final data = doc.data() as Map<String, dynamic>;
             final senderId = data['senderId'];
             final receiverId = data['receiverId'];
-
             if (senderId == user!.uid) {
               messagedUsers.add(receiverId);
             }
             else if (receiverId == user.uid) {
               messagedUsers.add(senderId);
             }
+            print('senderId: $senderId | receiverId: $receiverId');
           }
 
           final messagedUsersList = messagedUsers.toList();
