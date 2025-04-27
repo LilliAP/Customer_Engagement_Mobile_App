@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:se330_project_2/models/post.dart';
 import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
+import 'package:se330_project_2/widgets/post_card.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});
@@ -34,10 +35,7 @@ class BlogScreen extends StatelessWidget {
             itemCount: docs.length,
             itemBuilder: (context, index) {
               var post = Post.fromMap(docs[index].data(), docs[index].id);
-              return ListTile(
-                title: Text(post.title),
-                subtitle: Text(post.authorName),
-              );
+              return PostCard(post: post);
             },
           );
         }
