@@ -100,17 +100,122 @@ class UserMessagesPartial extends StatelessWidget {
             itemBuilder: (context, index) {
               final messagedUserId = messagedUsersList[index];
 
-              return ListTile(
-                title: Text('User ID: $messagedUserId'),  // TODO: Replace with username
-                trailing: const Icon(Icons.chat),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PrivateMessageScreen(receiverId: messagedUserId),
-                    ),
-                  );
-                },
+              return FutureBuilder<DocumentSnapshot>(
+                future: getUserProfile(messagedUserId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox(height: 0.0);
+                  }
+                  if (!snapshot.hasData || !snapshot.data!.exists) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                    return const SizedBox(height: 0.0);
+                  }
+                  final userData = snapshot.data!.data() as Map<String, dynamic>;
+                  return ListTile(
+                    title: Text(userData['username'] ?? "Username"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PrivateMessageScreen(receiverId: messagedUserId),
+                        ),
+                      );
+                    },
+                  ); 
+                }
               );
             }
           );
