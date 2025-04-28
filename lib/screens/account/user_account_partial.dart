@@ -92,11 +92,7 @@ class UserAccountPartial extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 ElevatedButton(
-                  onPressed: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Redirect to Help Page'))
-                    );
-                  }, 
+                  onPressed: null, 
                   child: const Text(
                     'Contact Us', 
                     style: TextStyle(fontWeight: FontWeight.bold),

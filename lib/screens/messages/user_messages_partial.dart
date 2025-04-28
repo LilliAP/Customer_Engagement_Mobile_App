@@ -21,9 +21,10 @@ class UserMessagesPartial extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('messages')
-        .orderBy('timestamp', descending: true)
-        .snapshots(),
+        stream: FirebaseFirestore.instance
+          .collection('messages')
+          //.orderBy('timestamp', descending: true)   requires global read, removed for now
+          .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -48,19 +49,29 @@ class UserMessagesPartial extends StatelessWidget {
             );
           }
           final docs = snapshot.data!.docs;
+
+          docs.sort((a, b) {
+            final aData = a.data() as Map<String, dynamic>;
+            final bData = b.data() as Map<String, dynamic>;
+
+            final aTimestamp = (aData['timestamp'] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0);
+            final bTimestamp = (bData['timestamp'] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0);
+
+            return bTimestamp.compareTo(aTimestamp); 
+          });
           final Set<String> messagedUsers = {};
-          print('Logged in UID: ${user!.uid}');
-          for(var doc in docs) {
+
+          for (var doc in docs) {
             final data = doc.data() as Map<String, dynamic>;
+
             final senderId = data['senderId'];
             final receiverId = data['receiverId'];
-            if (senderId == user.uid) {
+
+            if (senderId == user!.uid) {
               messagedUsers.add(receiverId);
-            }
-            else if (receiverId == user.uid) {
+            } else if (receiverId == user.uid) {
               messagedUsers.add(senderId);
             }
-            print('senderId: $senderId | receiverId: $receiverId');
           }
 
           final messagedUsersList = messagedUsers.toList();
