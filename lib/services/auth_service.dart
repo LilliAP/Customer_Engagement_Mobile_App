@@ -49,8 +49,22 @@ class AuthService {
       await user.reauthenticateWithCredential(credential);
     }
   }
-
-
+ Future<void> updateEmail(String updatedEmail) async {
+    final user = _auth.currentUser;
+    if(user != null && updatedEmail != "") {
+      await user.verifyBeforeUpdateEmail(updatedEmail);
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      'uid': user.uid,
+      'email': user.email,
+    }, SetOptions(merge: true));
+    }
+  }
+  Future<void> updatePassword(String updatedPassword) async {
+    final user = _auth.currentUser;
+    if(user != null && updatedPassword != ""){
+      await user.updatePassword(updatedPassword);
+    }
+  }
   // Gets the current user
   User? get currentUser => _auth.currentUser;
 

@@ -46,34 +46,40 @@ class SignupScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
-                  onPressed: () async {
-                    if(passController.text.trim() != confirmPassController.text.trim()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Passwords do not match'))
-                      );
-                      return;
-                    }
-                    try {
-                      await authService.signUp(
-                        emailController.text.trim(),
-                        passController.text.trim(),
-                        usernameController.text.trim(),
-                        fullNameController.text.trim()
-                      );
-                      
-                      // On login success, redirect to home
-                      Navigator.pushReplacementNamed(context, '/login');
-                    }
-                    catch(e) {
-                      //print('Sign Up Failed: $e');  // used for debugging
-                      
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Sign up failed'))
-                      );
-                    }
-                  }, 
-                  child: const Text('Sign Up'),
-                ),
+              onPressed: () async {
+                if(passController.text.trim().length < 6){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Password must be at least 6 characters'))
+                  );
+                  return;
+                }
+                if(passController.text.trim() != confirmPassController.text.trim()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Passwords do not match'))
+                  );
+                  return;
+                }
+                try {
+                  await authService.signUp(
+                    emailController.text.trim(),
+                    passController.text.trim(),
+                    usernameController.text.trim(),
+                    fullNameController.text.trim()
+                  );
+                  
+                  // On login success, redirect to home
+                  Navigator.pushReplacementNamed(context, '/login');
+                }
+                catch(e) {
+                  //print('Sign Up Failed: $e');  // used for debugging
+                  
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Sign up failed'))
+                  );
+                }
+              }, 
+              child: const Text('Sign Up'),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/login');
