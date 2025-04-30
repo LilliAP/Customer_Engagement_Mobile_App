@@ -1,7 +1,8 @@
 # se330_project_2
 
 A new Flutter project.
-
+# Database can be found here:
+https://console.firebase.google.com/u/1/project/se330-project2/overview
 ## Getting Started
 
 This project is a starting point for a Flutter application.
