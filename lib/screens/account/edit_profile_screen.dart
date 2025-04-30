@@ -88,7 +88,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 110.0),
                 ElevatedButton(
                   onPressed: () async {
-                      await UpdateProfileInfo(fullNameController.text.trim(), usernameController.text.trim(), selectedProfilePic!);
+                      await _updateProfileInfo(fullNameController.text.trim(), usernameController.text.trim(), selectedProfilePic!);
                       Navigator.pushReplacementNamed(context, '/account');
                   }, 
                   child: const Text(
@@ -128,7 +128,9 @@ Future<DocumentSnapshot> _getUserProfile(User? user) async {
   }
 }
 
-Future<void> UpdateProfileInfo(String fullName, String username, String profilePic) async {
+Future<void> _updateProfileInfo(String fullName, String username, String profilePic) async {
+  print('Selected profile pic: $profilePic');
+
   final user = FirebaseAuth.instance.currentUser;
   if(user != null){
     await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
