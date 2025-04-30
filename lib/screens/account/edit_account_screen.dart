@@ -1,6 +1,3 @@
-// TODO: Implement Edit Profile Page
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,11 +53,12 @@ class EditAccountScreen extends StatelessWidget {
                     );
                     
                     // On login success, redirect to home
-                    Navigator.pushReplacementNamed(context, '/login', arguments: 'Your email was updated sucessfully! Please verify your new email then log in again.',);
+                    Navigator.pushReplacementNamed(context, '/login', arguments: {
+                      'snackbarMessage': 'Your email was updated sucessfully! Please verify your new email then log in again.',
+                    });
                   }
                   catch(e) {
                     print('$e');  // used for debugging
-                    
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Failed to Change Account Email'))
                     );
@@ -107,7 +105,9 @@ class EditAccountScreen extends StatelessWidget {
                     );
                     
                     // On login success, redirect to home
-                    Navigator.pushReplacementNamed(context, '/login', arguments: 'Your password was updated successfully. Please log in again.',);
+                    Navigator.pushReplacementNamed(context, '/login', arguments: {
+                      'snackbarMessage': 'Your password was updated successfully. Please log in again.',
+                    },);
                   }
                   catch(e) {
                     print('$e');  // used for debugging

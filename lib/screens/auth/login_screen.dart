@@ -97,15 +97,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if(_hasShownMessage){
-      final message = ModalRoute.of(context)?.settings.arguments as String?;
-      if (message != null && message.isNotEmpty) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message)),
-          );
-        });
-      }
+
+    if(_hasShownMessage) return;
+    _hasShownMessage = true;
+    
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final message = args != null ? args['snackbarMessage'] as String? : null;
+
+    if (message != null && message.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+          Navigator.pushReplacementNamed(context, '/login');
+      });
     }
   }
 }

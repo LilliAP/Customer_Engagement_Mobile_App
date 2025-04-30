@@ -1,5 +1,3 @@
-// TODO: Implement Edit Profile Page
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -88,9 +86,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(height: 110.0),
                 ElevatedButton(
                   onPressed: () async {
-                      await _updateProfileInfo(fullNameController.text.trim(), usernameController.text.trim(), selectedProfilePic!);
-                      Navigator.pushReplacementNamed(context, '/account');
-                  }, 
+                    if(user != null){
+                      final query = await FirebaseFirestore.instance
+                        .collection('users')
+                        .where('username', isEqualTo: usernameController.text.trim())
+                        .where('uid', isNotEqualTo: user!.uid)
+                        .limit(1)
+                        .get();
+                        final usernameExists = query.docs.isNotEmpty;
+                        if(usernameExists){
+                          print("Cannot set username to that of another user's");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('That username is already taken! Please choose a new one'))
+                          );
+                          return;
+                        }
+                        await _updateProfileInfo(fullNameController.text.trim(), usernameController.text.trim(), selectedProfilePic!);
+                        Navigator.pushReplacementNamed(context, '/account');
+                  }},
                   child: const Text(
                     'Save Changes', 
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -129,7 +142,7 @@ Future<DocumentSnapshot> _getUserProfile(User? user) async {
 }
 
 Future<void> _updateProfileInfo(String fullName, String username, String profilePic) async {
-  print('Selected profile pic: $profilePic');
+  // print('Selected profile pic: $profilePic');
 
   final user = FirebaseAuth.instance.currentUser;
   if(user != null){

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../services/auth_service.dart';
 
@@ -47,6 +48,20 @@ class SignupScreen extends StatelessWidget {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () async {
+                final query = await FirebaseFirestore.instance
+                  .collection('users')
+                  .where('username', isEqualTo: usernameController.text.trim())
+                  .limit(1)
+                  .get();
+
+                final usernameExists = query.docs.isNotEmpty;
+                if(usernameExists){
+                  print("Cannot set username to that of another user's");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('That username is already taken! Please choose a new one'))
+                  );
+                  return;
+                }
                 if(passController.text.trim().length < 6){
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Password must be at least 6 characters'))
@@ -68,7 +83,9 @@ class SignupScreen extends StatelessWidget {
                   );
                   
                   // On login success, redirect to home
-                  Navigator.pushReplacementNamed(context, '/login');
+                  Navigator.pushReplacementNamed(context, '/login',  arguments: {
+                      'snackbarMessage': 'You signed up sucessfully! Please log in using your credentials.',
+                    });
                 }
                 catch(e) {
                   //print('Sign Up Failed: $e');  // used for debugging
@@ -82,7 +99,7 @@ class SignupScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/login');
+                Navigator.pushReplacementNamed(context, '/login',);
               }, 
               child: const Text.rich(
                 TextSpan(

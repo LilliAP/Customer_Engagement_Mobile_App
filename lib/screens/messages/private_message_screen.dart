@@ -148,7 +148,7 @@ class _PrivateMessageScreenState extends State<PrivateMessageScreen> {
       _scrollDown();
     }
     catch(e) {
-      print('Failed to send message: $e');    // for debugging
+      // print('Failed to send message: $e');    // for debugging
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to send message')),
       );
