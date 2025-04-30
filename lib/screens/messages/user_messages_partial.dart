@@ -23,7 +23,7 @@ class UserMessagesPartial extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
           .collection('messages')
-          //.orderBy('timestamp', descending: true)   requires global read, removed for now
+          .orderBy('timestamp', descending: true)
           .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,15 +50,7 @@ class UserMessagesPartial extends StatelessWidget {
           }
           final docs = snapshot.data!.docs;
 
-          docs.sort((a, b) {
-            final aData = a.data() as Map<String, dynamic>;
-            final bData = b.data() as Map<String, dynamic>;
 
-            final aTimestamp = (aData['timestamp'] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0);
-            final bTimestamp = (bData['timestamp'] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0);
-
-            return bTimestamp.compareTo(aTimestamp); 
-          });
           final Set<String> messagedUsers = {};
 
           for (var doc in docs) {
@@ -107,105 +99,23 @@ class UserMessagesPartial extends StatelessWidget {
                     return const SizedBox(height: 0.0);
                   }
                   if (!snapshot.hasData || !snapshot.data!.exists) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
                     return const SizedBox(height: 0.0);
                   }
                   final userData = snapshot.data!.data() as Map<String, dynamic>;
                   return ListTile(
-                    title: Text(userData['username'] ?? "Username"),
+                    leading: Image.asset(
+                      userData['profilePic'] ?? "assets/images/pp1.png",
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(
+                      userData['username'] ?? "Username",
+                      style: TextStyle(
+                        fontSize: 17.0,
+                      ),
+                    ),
+                    subtitle: Text('', style: TextStyle(fontSize: 15.0),),
                     onTap: () {
                       Navigator.push(
                         context,

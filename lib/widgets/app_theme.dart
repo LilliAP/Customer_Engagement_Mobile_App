@@ -21,7 +21,8 @@ class AppTheme{
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: appColorScheme.secondary,
-        foregroundColor: appColorScheme.surface
+        foregroundColor: appColorScheme.surface,
+        maximumSize: const Size.fromHeight(50.0),
       )
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(

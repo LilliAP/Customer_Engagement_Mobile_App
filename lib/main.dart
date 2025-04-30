@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:se330_project_2/screens/account/account_screen.dart';
+import 'package:se330_project_2/screens/account/edit_account_screen.dart';
 import 'package:se330_project_2/screens/auth/auth_wrapper.dart';
 import 'package:se330_project_2/screens/blog/blog_screen.dart';
 import 'package:se330_project_2/screens/blog/create_post_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/messages': (context) => const MessagesScreen(),
         '/account': (context) => const AccountScreen(),
         '/edit_profile': (context) => const EditProfileScreen(),
+        '/edit_account': (context) => const EditAccountScreen(),
         '/create_post': (context) => const CreatePostScreen(),
         '/start_message': (context) => const StartMessageScreen(),
       },

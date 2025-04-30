@@ -40,4 +40,6 @@ class AuthService {
 
   // Gets the current user
   User? get currentUser => _auth.currentUser;
+
 }
+

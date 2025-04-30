@@ -43,7 +43,7 @@ class _PrivateMessageScreenState extends State<PrivateMessageScreen> {
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                     .collection('messages')
-                    //.orderBy('timestamp', descending: false) requires global read, removed for now
+                    .orderBy('timestamp', descending: false)
                     .snapshots(), 
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -54,16 +54,6 @@ class _PrivateMessageScreenState extends State<PrivateMessageScreen> {
                     }
 
                     final docs = snapshot.data!.docs;
-                    // Sort messages to show most recent
-                    docs.sort((a, b) {
-                      final aData = a.data() as Map<String, dynamic>;
-                      final bData = b.data() as Map<String, dynamic>;
-
-                      final aTimestamp = (aData['timestamp'] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0);
-                      final bTimestamp = (bData['timestamp'] as Timestamp?)?.toDate() ?? DateTime.fromMillisecondsSinceEpoch(0);
-
-                      return aTimestamp.compareTo(bTimestamp); // ascending order
-                    });
                     final messages = docs.where((doc) {
                       final data = doc.data() as Map<String, dynamic>;
 
