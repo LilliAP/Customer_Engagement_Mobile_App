@@ -6,6 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:se330_project_2/widgets/profile_pic_selector.dart';
 
+const List<String> profilePicPaths = [
+  'assets/images/pp1.png',
+  'assets/images/pp2.png',
+  'assets/images/pp3.png',
+  'assets/images/pp4.png',
+  'assets/images/pp5.png',
+  'assets/images/pp6.png',
+  'assets/images/pp7.png',
+  'assets/images/pp8.png',
+  'assets/images/pp9.png',
+];
+
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 @override
@@ -18,6 +30,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController usernameController = TextEditingController();
   String? selectedProfilePic;
   bool isTextSet = false;
+  bool showImageGrid = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,32 +67,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               children: [
                 const SizedBox(height: 30.0),
                 Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                            final selection = await showDialog<String>(
-                            context: context, 
-                            builder: (context) => const ProfilePicSelector()
-                          );
-                          if(selection != null){
-                            setState(() {
-                              selectedProfilePic = selection;
-                            });
-                          }
-                        },    
-                        child: Image.asset(
-                          selectedProfilePic ?? userData['profilePic'],
-                          width: 150,
-                          height: 150,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text("Edit Profile Picture"),
-                    ],
-                  )
+                  child: ProfilePicSelector(
+                    initialPic: selectedProfilePic!,
+                    onPicSelected: (newPic) {
+                      setState(() {
+                        selectedProfilePic = newPic;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(height: 100.0),
                 TextField(
