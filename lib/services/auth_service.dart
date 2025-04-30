@@ -38,6 +38,19 @@ class AuthService {
     return await _auth.signOut();
   }
 
+  // Reauthenticate
+  Future<void> reauthenticateUser(String currentPassword) async {
+    final user = _auth.currentUser;
+    if(user != null && user.email != null) {
+      final credential = EmailAuthProvider.credential(
+        email: user.email!, 
+        password: currentPassword
+      );
+      await user.reauthenticateWithCredential(credential);
+    }
+  }
+
+
   // Gets the current user
   User? get currentUser => _auth.currentUser;
 
