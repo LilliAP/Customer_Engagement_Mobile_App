@@ -59,7 +59,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          
+                            final selection = await showDialog<String>(
+                            context: context, 
+                            builder: (context) => const ProfilePicSelector()
+                          );
+                          if(selection != null){
+                            setState(() {
+                              selectedProfilePic = selection;
+                            });
+                          }
                         },    
                         child: Image.asset(
                           selectedProfilePic ?? userData['profilePic'],
