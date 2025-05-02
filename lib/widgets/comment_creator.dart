@@ -42,20 +42,28 @@ class CommentCreator extends StatelessWidget{
                   .get();
                 final username = userData.docs.first.data()['username'];
                 final profilePic = userData.docs.first.data()['profilePic'];
-                updateCount(postId);
-                await FirebaseFirestore.instance
-                  .collection('posts')
-                  .doc(postId)
-                  .collection('comments')
-                  .add({
+                final postRef = FirebaseFirestore.instance.collection('posts').doc(postId);
+                final commentsRef = postRef.collection('comments');
+
+                await FirebaseFirestore.instance.runTransaction((transaction) async {
+                  final snapshot = await transaction.get(postRef);
+                  final currentCount = snapshot.data()?['commentsCount'] ?? 0;  
+
+                  transaction.set(commentsRef.doc(), {
                     'userId': user.uid,
                     'username': username,
                     'profilePic': profilePic,
                     'content': text,
-                    'timestamp': FieldValue.serverTimestamp()
+                    'timestamp': FieldValue.serverTimestamp(),
                   });
-
+                  transaction.update(postRef, {
+                    'commentsCount': currentCount + 1,
+                  });
+                });
                   commentController.clear();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Comment posted successfully!'))
+                  );
               }
             }, 
             icon: Icon(Icons.send)
@@ -64,17 +72,4 @@ class CommentCreator extends StatelessWidget{
       )
     );
   }
-}
-
-Future<void> updateCount(String postId) async {
-  final postRef = FirebaseFirestore.instance.collection('posts').doc(postId);
-
-  await FirebaseFirestore.instance.runTransaction((transaction) async {
-    final snapshot = await transaction.get(postRef);
-    final data = snapshot.data()!;
-    final currentCount = data['commentsCount'] ?? 0;
-    transaction.update(postRef, {
-      'commentsCount': currentCount + 1,
-    });
-  });
 }
