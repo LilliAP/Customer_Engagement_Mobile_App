@@ -56,6 +56,7 @@ class FullPostScreen extends StatelessWidget {
                 controller: bodyController,
                 config: const QuillEditorConfig(),
               ),
+              const SizedBox(height: 100.0),
               // Add Comment
               CommentCreator(postId: post.id),
               // Comments
@@ -71,7 +72,11 @@ class FullPostScreen extends StatelessWidget {
                     return const CircularProgressIndicator();
                   }
                   final comments = snapshot.data!.docs;
-                  return ListView.builder(
+                  return ListView.separated(
+                    separatorBuilder: (context, index) => const Divider(
+                      height: 1,
+                      thickness: 0.5,
+                    ),
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: comments.length,
