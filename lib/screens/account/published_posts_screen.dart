@@ -3,18 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:se330_project_2/models/post.dart';
-import 'package:se330_project_2/widgets/app_bottom_navbar.dart';
 import 'package:se330_project_2/widgets/post_card.dart';
 
-class BlogScreen extends StatelessWidget {
-  const BlogScreen({super.key});
+class PublishedPostsScreen extends StatelessWidget {
+  const PublishedPostsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    User currentUser = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Blog Posts", 
+          "Published Posts", 
           style: GoogleFonts.lora(
             fontWeight: FontWeight.bold, 
             fontSize: 28.0
@@ -24,6 +24,7 @@ class BlogScreen extends StatelessWidget {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
           .collection('posts')
+          .where('authorId', isEqualTo: currentUser.uid)
           .orderBy('timestamp', descending: true)
           .snapshots(), 
         builder: (context, snapshot){
@@ -43,7 +44,7 @@ class BlogScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10.0),
-                  Text('Start one now by pressing the \'Create Post\' button!'),
+                  Text('Start one by pressing the \'Create Post\' button!'),
                 ],
               )
             );
@@ -58,16 +59,6 @@ class BlogScreen extends StatelessWidget {
           );
         }
       ),
-      floatingActionButton: FirebaseAuth.instance.currentUser != null ? 
-        FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.pushNamed(context, '/create_post');
-          },
-          icon: Icon(Icons.edit_outlined),
-          label: Text('Create Post'),
-        )
-        : null,
-      bottomNavigationBar: AppBottomNavBar(selectedIndex: 1)
     );
   }
 }
