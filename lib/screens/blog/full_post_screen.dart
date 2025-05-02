@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
+import 'package:intl/intl.dart';
+import 'package:se330_project_2/widgets/comment_creator.dart';
 import 'dart:convert';
 import '../../models/post.dart'; // your Post model
 
@@ -53,6 +56,43 @@ class FullPostScreen extends StatelessWidget {
                 controller: bodyController,
                 config: const QuillEditorConfig(),
               ),
+              // Add Comment
+              CommentCreator(postId: post.id),
+              // Comments
+              StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                  .collection('posts')
+                  .doc(post.id)
+                  .collection('comments')
+                  .orderBy('timestamp', descending: false)
+                  .snapshots(), 
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const CircularProgressIndicator();
+                  }
+                  final comments = snapshot.data!.docs;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: comments.length,
+                    itemBuilder: (context, index) {
+                      final data = comments[index].data() as Map<String, dynamic>;
+                      return ListTile(
+                        leading: Image.asset(
+                          data['profilePic'] ?? 'assets/images/pp1.png',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(data['username'] ?? 'Anonymous'),
+                        subtitle: Text(data['content'] ?? ''),
+                        trailing: Text(DateFormat('MMM d, h:mm a').format(
+                          (data['timestamp'] as Timestamp).toDate())),
+                      );
+                    }
+                  );
+                }
+              )
             ],
           ),
         ),

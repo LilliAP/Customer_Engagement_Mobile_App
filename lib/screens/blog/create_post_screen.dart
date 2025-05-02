@@ -104,6 +104,11 @@ class CreatePostScreen extends StatelessWidget {
                         'authorId': user.uid,
                         'authorName': user.displayName ?? 'Placeholder',
                         'timestamp': FieldValue.serverTimestamp(), 
+                        'likes': [],
+                        'saves': [],
+                        'likesCount': 0,
+                        'savesCount': 0,
+                        'commentsCount': 0,
                       });
 
                       Navigator.pop(context);

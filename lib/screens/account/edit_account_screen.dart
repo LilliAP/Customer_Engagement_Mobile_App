@@ -58,7 +58,7 @@ class EditAccountScreen extends StatelessWidget {
                     });
                   }
                   catch(e) {
-                    print('$e');  // used for debugging
+                    // print('$e');  // used for debugging
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Failed to Change Account Email'))
                     );
@@ -110,7 +110,7 @@ class EditAccountScreen extends StatelessWidget {
                     },);
                   }
                   catch(e) {
-                    print('$e');  // used for debugging
+                    // print('$e');  // used for debugging
                     
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Failed to Change Password'))
