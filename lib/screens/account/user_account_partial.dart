@@ -8,7 +8,7 @@ class UserAccountPartial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double buttonWidth = 150.0;
+    const double buttonWidth = 170.0;
     User? user = FirebaseAuth.instance.currentUser;
     
     return Scaffold(
@@ -65,32 +65,6 @@ class UserAccountPartial extends StatelessWidget {
                 SizedBox(
                   width: buttonWidth,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/messages');
-                    },
-                    child: const Text(
-                      'Messages',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                SizedBox(
-                  width: buttonWidth,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                        Navigator.pushReplacementNamed(context, '/blog');
-                    }, 
-                    child: const Text(
-                      'Community', 
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                SizedBox(
-                  width: buttonWidth,
-                  child: ElevatedButton(
                     onPressed: () async {
                         Navigator.pushNamed(context, '/edit_profile');
                     }, 
@@ -109,6 +83,32 @@ class UserAccountPartial extends StatelessWidget {
                     },
                     child: const Text(
                       'Edit Account', 
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                SizedBox(
+                  width: buttonWidth,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/published_posts');
+                    },
+                    child: const Text(
+                      'Published Posts',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                SizedBox(
+                  width: buttonWidth,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                        Navigator.pushNamed(context, '/saved_posts');
+                    }, 
+                    child: const Text(
+                      'Saved Posts', 
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),

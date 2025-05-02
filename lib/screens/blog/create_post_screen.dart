@@ -12,124 +12,158 @@ class CreatePostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController titleController = TextEditingController();
     final QuillController bodyController = QuillController.basic();
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(title: const Text('Create Post')),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: const InputDecoration(labelText: ' Title'),
-            ),
-            const SizedBox(height: 40.0),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white70,
-                borderRadius: BorderRadius.circular(10.0)
-              ),
-              child: Column(
-                children: [
-                  QuillSimpleToolbar(
-                    controller: bodyController,
-                    config: const QuillSimpleToolbarConfig(
-                      showDividers: false,
-                      showUndo: false,
-                      showRedo: false,
-                      showFontFamily: false,
-                      showFontSize: false,
-                      showCodeBlock: false,
-                      showHeaderStyle: false,
-                      showInlineCode: false,
-                      showColorButton: false,
-                      showBackgroundColorButton: false,
-                      showSearchButton: false,
-                      showListCheck: false,
-                      showSubscript: false,
-                      showSuperscript: false,
-                      showLink: false,
-                      showQuote: false,
-                      showListBullets: false,
-                      showListNumbers: false,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 400,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0), 
-                      child: QuillEditor.basic(
-                        controller: bodyController,
-                        config: const QuillEditorConfig(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: FutureBuilder<DocumentSnapshot>(
+        future: _getUserProfile(user),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData || !snapshot.data!.exists) {
+            return const Center(child: Text('Profile not found.'));
+          }
+          final userData = snapshot.data!.data() as Map<String, dynamic>;
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: null, 
-                  child: Row(
-                    children: [
-                      Icon(Icons.save_outlined), 
-                      const SizedBox(width: 5.0,), 
-                      Text(' Save Draft '),
-                    ], 
-                  )
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(labelText: ' Title'),
                 ),
-                ElevatedButton(
-                  onPressed: () async { 
-                    final title = titleController.text.trim();
-                    final body = jsonEncode(bodyController.document.toDelta().toJson());
-                    final bodyText = bodyController.document.toPlainText().trim();    // for validation checking
-                    final user = FirebaseAuth.instance.currentUser;
-
-                    if(title.isEmpty || bodyText.isEmpty || user == null){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Title and body are required')
-                        )
-                      );
-                      return;
-                    }
-
-                    try{
-                      await FirebaseFirestore.instance.collection('posts').add({
-                        'title': title,
-                        'body': body,
-                        'authorId': user.uid,
-                        'authorName': user.displayName ?? 'Placeholder',
-                        'timestamp': FieldValue.serverTimestamp(), 
-                      });
-
-                      Navigator.pop(context);
-                    }
-                    catch(e){
-                      // print('Failed to create post: $e');  // for debugging
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Failed to create post')
-                        )
-                      );
-                    }
-                  }, 
-                  child: Row(
+                const SizedBox(height: 40.0),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  child: Column(
                     children: [
-                      Icon(Icons.edit_outlined), 
-                      const SizedBox(width: 5.0,), 
-                      Text('Publish Post'),
-                    ], 
-                  )
+                      QuillSimpleToolbar(
+                        controller: bodyController,
+                        config: const QuillSimpleToolbarConfig(
+                          showDividers: false,
+                          showUndo: false,
+                          showRedo: false,
+                          showFontFamily: false,
+                          showFontSize: false,
+                          showCodeBlock: false,
+                          showHeaderStyle: false,
+                          showInlineCode: false,
+                          showColorButton: false,
+                          showBackgroundColorButton: false,
+                          showSearchButton: false,
+                          showListCheck: false,
+                          showSubscript: false,
+                          showSuperscript: false,
+                          showLink: false,
+                          showQuote: false,
+                          showListBullets: false,
+                          showListNumbers: false,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 400,
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0), 
+                          child: QuillEditor.basic(
+                            controller: bodyController,
+                            config: const QuillEditorConfig(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: null, 
+                      child: Row(
+                        children: [
+                          Icon(Icons.save_outlined), 
+                          const SizedBox(width: 5.0,), 
+                          Text(' Save Draft '),
+                        ], 
+                      )
+                    ),
+                    ElevatedButton(
+                      onPressed: () async { 
+                        final title = titleController.text.trim();
+                        final body = jsonEncode(bodyController.document.toDelta().toJson());
+                        final bodyText = bodyController.document.toPlainText().trim();    // for validation checking
+                        final user = FirebaseAuth.instance.currentUser;
+
+                        if(title.isEmpty || bodyText.isEmpty || user == null){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Title and body are required')
+                            )
+                          );
+                          return;
+                        }
+
+                        try{
+                          await FirebaseFirestore.instance.collection('posts').add({
+                            'title': title,
+                            'body': body,
+                            'authorId': user.uid,
+                            'authorName': userData['username'] ?? 'Username',
+                            'timestamp': FieldValue.serverTimestamp(), 
+                            'likes': [],
+                            'saves': [],
+                            'likesCount': 0,
+                            'savesCount': 0,
+                            'commentsCount': 0,
+                          });
+
+                          Navigator.pop(context);
+                        }
+                        catch(e){
+                          // print('Failed to create post: $e');  // for debugging
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Failed to create post')
+                            )
+                          );
+                        }
+                      }, 
+                      child: Row(
+                        children: [
+                          Icon(Icons.edit_outlined), 
+                          const SizedBox(width: 5.0,), 
+                          Text('Publish Post'),
+                        ], 
+                      )
+                    )
+                  ],
                 )
               ],
             )
-          ],
-        )
+          );
+        }
       )
     );
+  }
+}
+
+Future<DocumentSnapshot> _getUserProfile(User? user) async {
+  if (user == null) throw Exception('No logged in user');
+
+  final querySnapshot = await FirebaseFirestore.instance
+    .collection('users')
+    .where('uid', isEqualTo: user.uid)
+    .limit(1)
+    .get();
+
+  if (querySnapshot.docs.isNotEmpty) {
+    return querySnapshot.docs.first;
+  } else {
+    throw Exception('User profile not found');
   }
 }

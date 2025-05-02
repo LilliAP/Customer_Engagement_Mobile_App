@@ -5,13 +5,16 @@ import 'package:flutter_quill/quill_delta.dart';
 import 'package:intl/intl.dart';
 import 'package:se330_project_2/models/post.dart';
 import 'package:se330_project_2/screens/blog/full_post_screen.dart';
+import 'package:se330_project_2/widgets/like_save_buttons.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
+  
   const PostCard({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       margin: const EdgeInsets.symmetric(
         horizontal: 12.0,
@@ -30,7 +33,12 @@ class PostCard extends StatelessWidget {
         },
         borderRadius: BorderRadius.circular(12.0),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(
+            top: 16.0,
+            left: 16.0,
+            right: 16.0,
+            bottom: 8.0
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,9 +63,11 @@ class PostCard extends StatelessWidget {
                 //_previewText(post.body),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-              )
+              ),
+              const SizedBox(height: 8.0),
+              LikeSaveButtons(post: post),
             ],
-          )
+          ),
         )
       )
     );

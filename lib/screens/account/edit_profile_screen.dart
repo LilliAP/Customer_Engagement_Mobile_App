@@ -95,7 +95,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         .get();
                         final usernameExists = query.docs.isNotEmpty;
                         if(usernameExists){
-                          print("Cannot set username to that of another user's");
+                          // print("Cannot set username to that of another user's");
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('That username is already taken! Please choose a new one'))
                           );
