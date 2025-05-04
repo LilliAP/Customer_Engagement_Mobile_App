@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:se330_project_2/widgets/app_theme.dart';
 
 class CreatePostScreen extends StatelessWidget {
   const CreatePostScreen({super.key});
@@ -135,7 +136,7 @@ class CreatePostScreen extends StatelessWidget {
                       }, 
                       child: Row(
                         children: [
-                          Icon(Icons.edit_outlined), 
+                          Icon(Icons.edit_outlined, color: AppTheme.appColorScheme.surface), 
                           const SizedBox(width: 5.0,), 
                           Text('Publish Post'),
                         ], 
